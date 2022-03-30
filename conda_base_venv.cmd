@@ -1,1 +1,1 @@
-C:/Users/Mu-jun/anaconda3/Scripts/activates
+C:/Users/Mu-jun/anaconda3/Scripts/activate
