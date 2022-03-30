@@ -1,8 +1,14 @@
+'''
+장고에서 사용하는 속성의 타입
+https://docs.djangoproject.com/en/3.0/ref/models/fields/#field-types
+
+filter에 대한 자세한 사용법
+https://docs.djangoproject.com/en/3.0/topics/db/queries/
+'''
+
 from django.db import models
 
 # Create your models here.
-# 장고에서 사용하는 속성의 타입
-# https://docs.djangoproject.com/en/3.0/ref/models/fields/#field-types
 class Question(models.Model):
     subject = models.CharField(max_length=200)
     content = models.TextField()
