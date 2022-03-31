@@ -1,0 +1,16 @@
+<!--
+    파이보에 필요한 템플릿 문법
+    https://docs.djangoproject.com/en/3.0/topics/templates/
+-->
+
+{% if question_list %}
+    <ul>
+        {% for question in question_list %}
+        <!-- <li><a href='/pybo/{{ question.id }}/'>{{ question.subject }}</a></li>
+        이렇게 하드코딩하면 나중에 페이지 구조가 바뀌어 url이 바뀌면 일일이 찾아서 변경해주어야 한다. -->
+            <li><a href='{% url 'pybo:detail' question.id %}'>{{ question.subject }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>질문이 없습니다.</p>
+{% endif %}
