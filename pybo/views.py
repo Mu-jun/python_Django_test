@@ -1,8 +1,8 @@
-# from django.http import HttpResponse
+from django.http import HttpResponseNotAllowed
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Question,Answer
-from .forms import QuestionForm
+from .forms import QuestionForm, AnswerForm
 
 
 # Create your views here.
@@ -25,21 +25,6 @@ def detail(request, question_id):
     context = {'question':question}
     return render(request, 'pybo/question_detail.html',context)
 
-def answer_create(request, question_id):
-    '''
-    pybo 답변등록
-    '''
-    question = get_object_or_404(Question, pk=question_id)
-    # 방법1
-    question.answer_set.create(content=request.POST.get('content'), create_date=timezone.now())
-    # 방법2
-    '''
-    Answer모델을 사용하여 만들기
-    answer = Answer(question=question, content=request.POST.get('content'), create_date=timezone.now())
-    answer.save()
-    '''
-    return redirect('pybo:detail', question_id=question_id)
-
 def question_create(request):
     if request.method == 'POST':
         form = QuestionForm(request.POST)
@@ -54,3 +39,40 @@ def question_create(request):
         form = QuestionForm()
         
     return render(request, 'pybo/question_form.html', {'form':form})
+
+def answer_create(request, question_id):
+    '''
+    pybo 답변등록
+    '''
+    question = get_object_or_404(Question, pk=question_id)
+    
+    '''
+    폼을 이용하지 않고 만들기
+    
+    # 방법1
+    question.answer_set.create(content=request.POST.get('content'), create_date=timezone.now())
+    # 방법2
+    Answer모델을 사용하여 만들기
+    answer = Answer(question=question, content=request.POST.get('content'), create_date=timezone.now())
+    answer.save()
+
+    return redirect('pybo:detail', question_id=question_id)
+    '''
+    
+    '''
+    폼을 이용해서 HTML만들기
+    '''
+    
+    if request.method=='POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = form.save(commit=False)
+            answer.create_date = timezone.now()
+            answer.question = question
+            answer.save()
+            return redirect('pybo:detail', question_id=question_id)
+    else:
+        return HttpResponseNotAllowed('Only POST is possible.')
+    
+    context = {'question':question, 'form':form}
+    return render(request, 'pybo/question_detail.html', context)
