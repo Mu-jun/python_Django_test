@@ -26,4 +26,7 @@
 ## 부트스트랩 네비게이션바
 >https://getbootstrap.com/docs/5.1/components/navbar
 
+## 부트스트랩 pagination
+>https://getbootstrap.com/docs/5.1/components/pagination/
+
 ## 
