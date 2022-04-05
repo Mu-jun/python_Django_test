@@ -12,13 +12,18 @@
 >https://docs.djangoproject.com/en/4.0/topics/forms/
     
 # 부트스트랩
-## 부트스트랩 4.6.x 다운로드
->https://getbootstrap.com/docs/4.6/getting-started/download/
+## 부트스트랩 5.1.x 다운로드
+>https://getbootstrap.com/docs/5.1/getting-started/download/
 
-**버전 확인 주의**
+**버전에 주의해주세요!!**
   
 ## 부트스트랩에 대한 자세한 내용
->https://getbootstrap.com/docs/4.6/getting-started/introduction/
+>https://getbootstrap.com/docs/5.1/getting-started/introduction/
   
 ## 부트스트랩 card 컴포넌트
->https://getbootstrap.com/docs/4.6/components/card/
+>https://getbootstrap.com/docs/5.1/components/card/
+  
+## 부트스트랩 네비게이션바
+>https://getbootstrap.com/docs/5.1/components/navbar
+
+## 
