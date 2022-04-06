@@ -8,7 +8,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">로그인</a>
+<!-- 뷰함수에서 템플릿에 User 객체를 전달하지 않더라도 템플릿에서는 django.contrib.auth 기능으로 인해 User 객체를 사용할 수 있다. 대표적으로 다음과 같은 것들이 있다.
+
+user.is_authenticated - 현재 사용자가 인증되었는지 여부 (로그인한 상태라면 true, 로그아웃 상태라면 false)
+user.is_anonymous - is_authenticated의 반대 경우 (로그인한 상태라면 false, 로그아웃 상태라면 true)
+user.username - 사용자명 (사용자 ID)
+user.is_superuser - 사용자가 슈퍼유저인지 여부  -->
+                    {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a>
+                    {% else %}
+                    <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
+                    {% endif %}
                 </li>
             </ul>
         </div>

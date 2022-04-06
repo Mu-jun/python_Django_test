@@ -10,6 +10,9 @@
   
 ## django 폼(form)
 >https://docs.djangoproject.com/en/4.0/topics/forms/
+
+## django 사용자 인증(auth)
+>https://docs.djangoproject.com/en/4.0/ref/contrib/auth/
     
 # 부트스트랩
 ## 부트스트랩 5.1.x 다운로드

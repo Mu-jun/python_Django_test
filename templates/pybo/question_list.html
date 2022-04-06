@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+<!-- load는 반드시 extends 다음에 와야한다 -->
+{% load pybo_filter %}
+
 {% block content %}
 
 <div class='container my-3'>
@@ -14,11 +17,14 @@
             {% if question_list %}
                 {% for question in question_list %}
                 <tr>
-                    <td>{{ forloop.counter }}</td>
+                    <td>{{ question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter|add:1 }}</td>
                     <td>
                         <!-- <a href='/pybo/{{ question.id }}/'>{{ question.subject }}</a>
                         이렇게 하드코딩하면 나중에 페이지 구조가 바뀌어 url이 바뀌면 일일이 찾아서 변경해주어야 한다. -->
                         <a href='{% url 'pybo:detail' question.id %}'>{{ question.subject }}</a>
+                        {% if question.answer_set.count > 0 %}
+                            <span class="text-danger small mx-2">{{ question.answer_set.count }}</span>
+                        {% endif %}
                     </td>
                     <td>{{ question.create_date }}</td>
                 </tr>
