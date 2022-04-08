@@ -24,8 +24,18 @@
     {% block content %}
     {% endblock %}
     <!-- 기본 템플릿 안에 삽입될 내용 End -->
+<!--
+    자바스크립트를 </body>태그 바로 위에 삽입하는 이유
 
+    화면 렌더링이 완료된 후에 자바스크립트가 실행되게 하기 위해서 이렇게 한다.
+
+    화면 렌더링이 완료되지 않은 상태에서 자바스크립트를 실행하면 하면의 값을 읽지 못하는 오류가 발생할 수도 있고 화면 로딩이 지연되면 문제가 발생할 수도 있다.
+-->
     <!-- Bootstrap JS -->
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- 자바스크립트 Start-->
+    {% block script %}
+    {% endblock %}
+    <!-- 자바스크립트 End -->
 </body>
 </html>
