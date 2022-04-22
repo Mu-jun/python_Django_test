@@ -32,4 +32,9 @@
 ## 부트스트랩 pagination
 >https://getbootstrap.com/docs/5.1/components/pagination/
 
-## 
+# 마크다운
+## 마크다운 확장 기능 문서
+>https://python-markdown.github.io/extensions/
+  
+## 마크다운 쉽게 사용하기
+>[simpleMDE](https://simplemde.com/)
