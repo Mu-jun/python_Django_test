@@ -5,6 +5,20 @@
 {% block content %}
 
 <div class='container my-3'>
+    <div class='row my-3'>
+        <div class='col-6'>
+            <a href="{% url 'pybo:question_create' %}" class='btn btn-primary'>질문 등록하기</a>
+        </div>
+        <div class='col-6'>
+            <div class='input-group'>
+                <input type="text" class="form-control" id='search_kw' value="{{ kw|default_if_none:'' }}">
+                <div class='input-group-append'>
+                    <button type="button" class="btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <table class='table'>
         <thead>
             <tr class='text-center table-dark'>
@@ -52,13 +66,13 @@
             </li>
         {% else %}
             <li class="page-item">
-                <a class="page-link" href="?page=1">처음</a>
+                <a class="page-link" href="javascript:void(0)" data-page="{{ 1 }}">처음</a>
             </li>
         {% endif %}
         <!-- 이전페이지 -->
         {% if question_list.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ question_list.previous_page_number }}">이전</a>
+                <a class="page-link" href="javascript:void(0)" data-page="{{ question_list.previous_page_number }}">이전</a>
             </li>
         {% else %}
             <li class="page-item disabled">
@@ -72,11 +86,11 @@
                 {% if page_number == question_list.number %}
                 <!-- active로 현재 페이지 강조 -->
                     <li class="page-item active" aria-current="page">
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        <a class="page-link" href="javascript:void(0)" data-page="{{ page_number }}">{{ page_number }}</a>
                     </li>
                 {% else %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        <a class="page-link" href="javascript:void(0)" data-page="{{ page_number }}">{{ page_number }}</a>
                     </li>
                 {% endif %}
             {% endif %}
@@ -84,7 +98,7 @@
         <!-- 다음페이지 -->
         {% if question_list.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ question_list.next_page_number }}">다음</a>
+                    <a class="page-link" href="javascript:void(0)" data-page="{{ question_list.next_page_number }}">다음</a>
                 </li>
         {% else %}
                 <li class="page-item disabled">
@@ -94,7 +108,7 @@
         <!-- 마지막으로 -->
         {% if question_list.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ question_list.paginator.num_pages }}">마지막</a>
+                <a class="page-link" href="javascript:void(0)" data-page="{{ question_list.paginator.num_pages }}">마지막</a>
             </li>
         {% else %}
             <li class="page-item disabled">
@@ -103,7 +117,29 @@
         {% endif %}
     </ul>
     <!-- 페이징처리 끝 -->
-
+<!-- 질문 등록버튼 위치 이동
     <a href="{% url 'pybo:question_create' %}" class="btn btn-primary">질문 등록하기</a>
+-->
 </div>
+<form id="searchForm" method="get" action="{% url 'index' %}">
+    <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
+    <input type="hidden" id="page" name="page" value="{{ page }}">
+</form>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+    const page_elements = document.getElementsByClassName("page-link");
+    Array.from(page_elements).forEach(function(element) {
+        element.addEventListener("click", function() {
+            document.getElementById('page').value = this.dataset.page;
+            document.getElementById('searchForm').submit();
+        });
+    });
+    const btn_search = document.getElementById('btn_search');
+    btn_search.addEventListener("click", function() {
+        document.getElementById('kw').value = document.getElementById('search_kw').value;
+        document.getElementById('page').value = 1; // 검색버튼을 누를 경우 1페이지부터 조회하도록 한다.
+        document.getElementById('searchForm').submit();
+    });
+</script>
 {% endblock %}

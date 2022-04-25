@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
 
 from ..models import Question
 
@@ -11,13 +12,29 @@ def index(request):
     question_list = Question.objects.order_by('-create_date') # order_by 는 조회 결과를 정렬하는 함수
     # -create_date : 작성일 역순으로
     '''
+    검색기능 추가
+    '''
+    kw =  request.GET.get('kw','')
+    if kw:
+        question_list = question_list.filter(
+            Q(subject__icontains=kw) |
+            Q(content__icontains=kw) |
+            Q(author__username__icontains=kw) |
+            Q(answer__content__icontains=kw) |
+            Q(answer__author__username__icontains=kw)
+        ).distinct()
+    
+    '''
     Paginator를 이용한 페이징
     '''
     page = request.GET.get('page','1') # 페이지 default: 1
     paginator = Paginator(question_list, 10) # 페이지당 10개씩 보여주기
     page_obj = paginator.get_page(page) # 장고 내부적으로 페이지의 데이터만 조회하도록 쿼리변경
+    
     context = {
-        'question_list': page_obj # 게시물 전체 데이터 question_list
+        'question_list': page_obj, # 게시물 전체 데이터 question_list
+        'page': page,
+        'kw': kw,
         }
     return render(request, 'pybo/question_list.html',context)
 '''
