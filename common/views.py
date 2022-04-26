@@ -23,4 +23,5 @@ def signup(request):
     context = {'form': form }    
     return render(request, 'common/signup.html', context)
     
-            
+def page_not_found(request, exception):
+    return render(request, 'common/404.html', {})
