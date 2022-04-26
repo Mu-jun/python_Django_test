@@ -1,1 +1,0 @@
-C:/Users/Mu-jun/anaconda3/Scripts/activate
