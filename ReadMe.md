@@ -1,3 +1,7 @@
+## python 로깅(logging)
+>https://docs.python.org/ko/3.8/howto/logging.html
+>https://docs.python.org/ko/3.8/howto/logging-cookbook.html
+  
 # django 자주찾는 문서
 ## django에서 사용하는 속성의 타입
 >https://docs.djangoproject.com/en/3.0/ref/models/fields/#field-types
@@ -13,7 +17,10 @@
 
 ## django 사용자 인증(auth)
 >https://docs.djangoproject.com/en/4.0/ref/contrib/auth/
-    
+
+## django 로깅(logging)
+>https://docs.djangoproject.com/en/4.0/topics/logging
+  
 # 부트스트랩
 ## 부트스트랩 5.1.x 다운로드
 >https://getbootstrap.com/docs/5.1/getting-started/download/

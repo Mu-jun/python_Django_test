@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from logging import StreamHandler
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -137,3 +138,65 @@ LOGIN_REDIRECT_URL = '/'
 # 로그아웃시 이동하는 URL
 
 LOGOUT_REDIRECT_URL = '/'
+
+# 로깅설정
+
+DEFAULT_LOGGING = {
+    'version' : 1, # logging모듈 버전을 1로 고정한다. 다른 값은 ValueError
+    'disable_existing_loggers' : False, # 기존 로거 비활성화 여부
+    'filters' : { # 특정 조건에서 로그 출력 결정
+        'require_debug_false': { # 전역변수 DEBUG=False일 경우
+            '()' : 'django.utils.log.RequireDebugFalse'
+        },
+        'require_debug_true': { # 전역변수 DEBUG=True일 경우
+            '()' : 'django.utils.log.RequireDebugTrue'
+        },
+    },
+    'formatters' : { # 출력 포맷 설정
+        'django.server' : {
+            '()' : 'django.utils.log.ServerFormatter',
+            'format' : '[{server_time}] {message}',
+            'style' : '{',
+        },
+        'standard' : {
+            'format' : '%(asctime)s [%(levelname)s] %(name)s : %(message)s'
+        },
+    },
+    'handlers' : { # 로그의 출력 방법을 정의
+        'console' : {
+            'level' : 'INFO',
+            'filters' : ['require_debug_true'],
+            'class' : 'logging.StreamHandler',
+        },
+        'django.server' : { # runserver환경
+            'level' : 'INFO',
+            'class' : 'logging.StreamHandler',
+            'formatter' : 'django.server',
+        },
+        'mail_admins' : {
+            'level' : 'ERROR',
+            'filters' : ['require_debug_false'],
+            'class' : 'django.utils.log.AdminEmailHandler',
+        },
+        'file' : {
+            'level' : 'INFO',
+            'filters' : ['require_debug_false'],
+            'class' : 'logging.handlers.RotatingFileHandler',
+            'filename' : BASE_DIR / 'logs/django.log',
+            'maxBytes' : 1024*1024*5, # 5 MB
+            'backupCount' : 5,
+            'formatter' : 'standard',
+        },
+    },
+    'loggers' : {
+        'django' : { # 장고 프레임워크가 사용하는 로거
+            'handlers' : ['console','mail_admins', 'file'],
+            'level' : 'INFO'
+        },
+        'django.server' : { # 개발 서버가 사용하는 로거
+            'handlers' : ['django.server'],
+            'level' : 'INFO',
+            'propagate' : False, # 상위 패키지로 로그 전달
+        }
+    }
+}

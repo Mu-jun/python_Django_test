@@ -1,4 +1,5 @@
 conda_django_venv.cmd
+logs
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
