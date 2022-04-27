@@ -1,3 +1,7 @@
+## DEBUG=False일 때,
+>상용단계로 인식, 웹서버와 WSGI서버에서 static&media파일을 제공하는게 바람직하므로 django에서는 제공하지 않음.
+python manage.py runserver --insecure 을 사용하면 static을 제공하기는 한다.
+
 ## python 로깅(logging)
 >https://docs.python.org/ko/3.8/howto/logging.html
 >https://docs.python.org/ko/3.8/howto/logging-cookbook.html

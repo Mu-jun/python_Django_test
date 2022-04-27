@@ -2,8 +2,8 @@ from tkinter import ALL
 from .base import *
 import os
 
-ALLOWED_HOSTS = ['13.209.74.184']
-'''
+ALLOWED_HOSTS = ['13.209.74.184:8000']
+
 # WSGI 서버(Gunicorn) 사용시
 
 STATIC_ROOT = [
@@ -11,5 +11,6 @@ STATIC_ROOT = [
     
 ]
 STATICFILES_DIRS = []
-'''
-DEBUG = False
+
+DEBUG = False # False면 static&media파일 제공안함
+# static파일을 제공받으려면 python manage.py runserver --insecure
