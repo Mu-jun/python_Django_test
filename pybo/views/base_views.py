@@ -56,6 +56,7 @@ paginator.num_pages 마지막 페이지 번호
 
 
 def detail(request, question_id):
+    3/0 # 로그 테스트
     '''
     pybo 내용 출력
     '''
