@@ -141,7 +141,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 # 로깅설정
 
-DEFAULT_LOGGING = {
+LOGGING = {
     'version' : 1, # logging모듈 버전을 1로 고정한다. 다른 값은 ValueError
     'disable_existing_loggers' : False, # 기존 로거 비활성화 여부
     'filters' : { # 특정 조건에서 로그 출력 결정
