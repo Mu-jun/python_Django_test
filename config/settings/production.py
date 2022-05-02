@@ -1,4 +1,3 @@
-from tkinter import ALL
 from .base import *
 import os
 
