@@ -197,6 +197,10 @@ LOGGING = {
             'handlers' : ['django.server'],
             'level' : 'INFO',
             'propagate' : False, # 상위 패키지로 로그 전달
+        },
+        'pybo' : {
+            'handlers' : ['console', 'file'],
+            'level' : 'INFO',
         }
     }
 }
