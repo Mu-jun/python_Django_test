@@ -5,7 +5,6 @@ from django.db.models import Q
 from ..models import Question
 
 def index(request):
-    3/0 # 로거 테스트
     # return HttpResponse('안녕하세요 pybo에 오신것을 환영합니다.')
     '''
     pybo 목록 출력
