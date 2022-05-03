@@ -6,7 +6,7 @@ ALLOWED_HOSTS = ['52.79.54.106', 'mujunkim.shop']
 # WSGI 서버(Gunicorn) 사용시
 
 STATIC_ROOT = [
-    BASE_DIR / 'static',
+    os.path.join(BASE_DIR, 'static')
 ]
 STATICFILES_DIRS = []
 
