@@ -1,7 +1,7 @@
 from .base import *
 import os
 
-ALLOWED_HOSTS = ['52.79.54.106', 'mujunkim.shop']
+ALLOWED_HOSTS = ['52.79.54.106', '.mujunkim.shop']
 
 # WSGI 서버(Gunicorn) 사용시
 
