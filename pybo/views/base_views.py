@@ -8,7 +8,7 @@ import logging
 logger = logging.getLogger("pybo")
 
 def index(request):
-    logger.info('접속')
+    logger.info('pybo접속')
     # return HttpResponse('안녕하세요 pybo에 오신것을 환영합니다.')
     '''
     pybo 목록 출력
